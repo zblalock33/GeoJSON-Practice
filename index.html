@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>ArcGIS Maps SDK for JavaScript Tutorials: Display a map</title>
+<style>
+html, body, #viewDiv {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+</style>
+<link rel="stylesheet" href="https://js.arcgis.com/4.22/esri/themes/light/main.css">
+<script src="https://js.arcgis.com/4.22/"></script>
+<script>
+require([
+    "esri/Map",
+    "esri/views/MapView",
+    "esri/layers/GeoJSONLayer" // Add this line
+], function(Map, MapView, GeoJSONLayer) { // Add GeoJSONLayer here
+    var map = new Map({
+        basemap: "topo-vector",
+        apiKey: "YOUR_API_KEY" // Replace with your API key
+    });
+
+    var view = new MapView({
+        container: "viewDiv",
+        map: map,
+        center: [-118.80500,34.02700], // Longitude, Latitude
+        zoom: 13 // Zoom Level
+    });
+
+    var geojsonLayer = new GeoJSONLayer({
+        url: "./map.geojson" // Replace with the path to your GeoJSON file
+    });
+
+    map.add(geojsonLayer);
+});
+</script>
+</head>
+<body>
+<div id="viewDiv"></div>
+</body>
+</html>
